@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="treeView">
+        <input type="text" placeholder="model ara" data-bind="value: query, valueUpdate: 'afterkeydown', event: { keyup: search }" autocomplete="off">
+        <ul>
+            <!-- ko foreach: itemList -->
+            <li class="brand" data-bind="attr: {'id' : 'brand_'+Id}">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="BrandIdList" class="custom-control-input" data-bind="attr: {'id': '__check_' + Id, 'indeterminate': indeterminate}, value: Id, checked: checked">
+                    <label class="custom-control-label" data-bind="attr: {'for': '__check_' + Id}, click: $root.check.bind($data, $parent)"></label>
+                    <span data-bind="text: BrandText, click: $root.toggle"></span>
+                </div>
+                <ul style="display: none">
+                    <!-- ko foreach: $data.BrandGroups -->
+                    <li class="model">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="ModelIdList" class="custom-control-input" data-bind="attr: {'id': '__subCheck_' + Id}, value: Id, checked: checked">
+                            <label class="custom-control-label" data-bind="text: GroupText + ' (' + VehiclesCount + ')', attr: {'for': '__subCheck_' + Id}, click: $root.check.bind($data, $parent)"></label>
+                        </div>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
